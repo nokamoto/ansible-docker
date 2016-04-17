@@ -1,0 +1,20 @@
+- command: which docker
+  failed_when: false
+  register: docker_command
+
+- set_fact: installed={{ docker_command.rc == 0 }}
+
+- yum: name=* state=latest
+  when: not installed
+  become: yes
+
+- template: src=docker.repo.j2 dest=/etc/yum.repos.d/docker.repo owner=root group=root mode=644
+  when: not installed
+  become: yes
+
+- yum: name=docker-engine-1.11.0-1.el7.centos state=present
+  when: not installed
+  become: yes
+
+- service: name=docker state=started enabled=yes
+  become: yes

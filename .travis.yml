@@ -5,3 +5,4 @@ install:
   - pip install ansible
 script:
   - ansible-playbook bootstrap-centos71.yml --syntax-check
+  - ansible-playbook docker-centos71.yml --syntax-check
