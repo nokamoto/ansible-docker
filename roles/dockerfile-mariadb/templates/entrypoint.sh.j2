@@ -1,0 +1,29 @@
+#!/bin/bash
+
+set -- mysqld "$@"
+
+echo "$@ --skip-networking"
+"$@" --skip-networking &
+pid="$!"
+echo "pid=$pid"
+
+echo "mysqladmin ping -u root --wait=30"
+if ! mysqladmin ping -u root --wait=30; then
+  echo "failed."
+  exit 1
+fi
+
+echo "mysql -u root < init.sql"
+if ! mysql -u root < init.sql; then
+  echo "failed."
+  exit 1
+fi
+
+echo "kill $pid"
+if ! kill "$pid"; then
+  echo "failed."
+  exit 1
+fi
+
+echo "exec $@"
+exec "$@"

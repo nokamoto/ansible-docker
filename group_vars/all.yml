@@ -8,3 +8,4 @@ dockerfile_directory: /home/{{ os_admin_user }}/docker
 docker_java: local/java
 docker_rabbitmq: local/rabbitmq
 docker_scala_rabbitmq_test: local/scala-rabbitmq-test
+docker_mariadb: local/mariadb

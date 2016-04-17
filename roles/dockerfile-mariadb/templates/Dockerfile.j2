@@ -1,0 +1,17 @@
+FROM centos:centos7.1.1503
+
+COPY MariaDB.repo /etc/yum.repos.d/MariaDB.repo
+
+RUN yum -y install MariaDB-Galera-server MariaDB-client galera
+
+COPY server.cnf /etc/my.cnf.d/server.cnf
+
+COPY init.sql /init.sql
+
+COPY entrypoint.sh /entrypoint.sh
+
+RUN chmod u+x /entrypoint.sh
+
+EXPOSE 3306
+
+ENTRYPOINT ["/entrypoint.sh"]
