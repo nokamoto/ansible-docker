@@ -2,3 +2,4 @@
   roles:
     - dockerfile-rabbitmq
     - dockerfile-scala-rabbitmq-test
+    - dockerfile-mariadb
