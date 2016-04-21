@@ -5,9 +5,9 @@
 ## vagrant
 ```
 vagrant up
-ssh -i keys/local admin@192.168.33.11
+ssh -i keys/local admin@192.168.33.21
 ```
 
 | node | ip |
 | --- | --- |
-| node1 | 192.168.33.11 |
+| node1 | 192.168.33.21 |
