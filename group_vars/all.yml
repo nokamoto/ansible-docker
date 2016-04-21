@@ -5,6 +5,9 @@ os_admin_uid: 2000
 
 dockerfile_directory: /home/{{ os_admin_user }}/docker
 
+docker_registry_domain: localhost
+docker_registry_port: 5000
+
 docker_java: local/java
 docker_rabbitmq: local/rabbitmq
 docker_scala_rabbitmq_test: local/scala-rabbitmq-test

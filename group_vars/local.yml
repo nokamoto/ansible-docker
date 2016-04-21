@@ -1,5 +1,5 @@
 etc_hosts: |
-  192.168.33.11 node1
+  192.168.33.21 node1
 
 os_admin_id_rsa: keys/local
 os_admin_id_rsa_pub: keys/local.pub

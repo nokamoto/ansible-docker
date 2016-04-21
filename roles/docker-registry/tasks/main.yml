@@ -1,0 +1,11 @@
+- set_fact: registry=registry
+
+- command: docker ps -q --filter "name={{ registry }}"
+  register: ps_registry
+  become: yes
+
+- debug: var=ps_registry
+
+- command: docker run -d -p {{ docker_registry_port }}:{{ docker_registry_port }} --name {{ registry }} registry:2
+  when: ps_registry.stdout == ""
+  become: yes

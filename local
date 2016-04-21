@@ -1,8 +1,8 @@
 [bootstrap]
-192.168.33.11
+192.168.33.21
 
 [docker]
-192.168.33.11
+192.168.33.21
 
 [local:children]
 bootstrap

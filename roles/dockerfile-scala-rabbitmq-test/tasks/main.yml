@@ -12,3 +12,9 @@
   args:
     chdir: "{{ dir }}"
   become: yes
+
+- command: docker tag {{ docker_scala_rabbitmq_test }} {{ docker_registry_domain }}:{{ docker_registry_port }}/{{ docker_scala_rabbitmq_test }}
+  become: yes
+
+- command: docker push {{ docker_registry_domain }}:{{ docker_registry_port }}/{{ docker_scala_rabbitmq_test }}
+  become: yes

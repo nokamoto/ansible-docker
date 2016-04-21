@@ -8,7 +8,7 @@ Vagrant.configure(2) do |config|
   (1..N).each do |id|
     config.vm.define "node#{id}" do |node|
       node.vm.box = "bento/centos-7.1"
-      node.vm.network "private_network", ip: "192.168.33.#{10+id}"
+      node.vm.network "private_network", ip: "192.168.33.#{20+id}"
 
       if id == N
         playbooks = ["bootstrap-centos71.yml", "docker-centos71.yml", "dockerfile.yml"]

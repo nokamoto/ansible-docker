@@ -16,3 +16,9 @@
   args:
     chdir: "{{ dir }}"
   become: yes
+
+- command: docker tag {{ docker_mariadb }} {{ docker_registry_domain }}:{{ docker_registry_port }}/{{ docker_mariadb }}
+  become: yes
+
+- command: docker push {{ docker_registry_domain }}:{{ docker_registry_port }}/{{ docker_mariadb }}
+  become: yes
