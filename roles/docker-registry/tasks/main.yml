@@ -1,9 +1,25 @@
 - set_fact: registry=registry
 
+- set_fact: certs=/home/{{ os_admin_user }}/certs crt=server.crt key=server.key
+
+- file: path={{ certs }} state=directory owner={{ os_admin_user }} group={{ os_admin_group }} mode=755
+  become: yes
+
+- copy: src={{ item }} dest={{ certs }}/{{ item }} owner={{ os_admin_user }} group={{ os_admin_group }} mode=644
+  with_items:
+    - "{{ crt }}"
+    - "{{ key }}"
+  become: yes
+
 - command: docker ps -q --filter "name={{ registry }}"
   register: ps_registry
   become: yes
 
-- command: docker run -d -p {{ docker_registry_port }}:{{ docker_registry_port }} --name {{ registry }} registry:2
+- command:
+    docker run -d -p {{ docker_registry_port }}:{{ docker_registry_port }} --name {{ registry }}
+      -v {{ certs }}:/certs
+      -e REGISTRY_HTTP_TLS_CERTIFICATE=/certs/{{ crt }}
+      -e REGISTRY_HTTP_TLS_KEY=/certs/{{ key }}
+      registry:2
   when: ps_registry.stdout == ""
   become: yes
