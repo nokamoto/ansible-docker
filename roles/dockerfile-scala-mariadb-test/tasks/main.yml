@@ -1,0 +1,20 @@
+- set_fact: dir={{ dockerfile_directory }}/scala-mariadb-test
+
+- file: path={{ dir }} state=directory owner={{ os_admin_user }} group={{ os_admin_group }} mode=755
+  become: yes
+
+- template: src={{ item }}.j2 dest={{ dir }}/{{ item }} owner={{ os_admin_user }} group={{ os_admin_group }} mode=644
+  with_items:
+    - Dockerfile
+  become: yes
+
+- command: docker build -t {{ docker_scala_mariadb_test }} .
+  args:
+    chdir: "{{ dir }}"
+  become: yes
+
+- command: docker tag {{ docker_scala_mariadb_test }} {{ docker_registry_domain }}:{{ docker_registry_port }}/{{ docker_scala_mariadb_test }}
+  become: yes
+
+- command: docker push {{ docker_registry_domain }}:{{ docker_registry_port }}/{{ docker_scala_mariadb_test }}
+  become: yes
