@@ -4,3 +4,4 @@
     - dockerfile-rabbitmq
     - dockerfile-scala-rabbitmq-test
     - dockerfile-mariadb
+    - dockerfile-scala-mariadb-test

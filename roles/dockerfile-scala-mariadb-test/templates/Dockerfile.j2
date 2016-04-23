@@ -1,0 +1,5 @@
+FROM {{ docker_java }}
+
+RUN wget https://github.com/nokamoto/scala-mariadb-test/releases/download/20160423/scala-mariadb-test.jar
+
+CMD java -Dhosts=${MARIADB_HOSTS} -Dusername=${MARIADB_USERNAME} -Dpassword=${MARIADB_PASSWORD} -jar scala-mariadb-test.jar
