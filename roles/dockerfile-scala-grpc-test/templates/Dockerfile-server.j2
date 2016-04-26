@@ -1,0 +1,5 @@
+FROM {{ docker_java }}
+
+RUN wget https://github.com/nokamoto/scala-grpc-test/releases/download/20160426/scala-grpc-test-server.jar
+
+CMD java -Dport=${GRPC_PORT} -jar scala-grpc-test-server.jar

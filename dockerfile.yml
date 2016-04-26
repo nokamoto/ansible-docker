@@ -5,3 +5,4 @@
     - dockerfile-scala-rabbitmq-test
     - dockerfile-mariadb
     - dockerfile-scala-mariadb-test
+    - dockerfile-scala-grpc-test
