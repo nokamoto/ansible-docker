@@ -13,3 +13,5 @@ docker_rabbitmq: local/rabbitmq
 docker_scala_rabbitmq_test: local/scala-rabbitmq-test
 docker_mariadb: local/mariadb
 docker_scala_mariadb_test: local/scala-mariadb-test
+docker_scala_grpc_test_server: local/scala-grpc-test-server
+docker_scala_grpc_test_client: local/scala-grpc-test-client

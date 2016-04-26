@@ -1,0 +1,26 @@
+- set_fact:
+    dir: "{{ dockerfile_directory }}/scala-grpc-test"
+    dockerfiles:
+      Dockerfile-server: "{{ docker_scala_grpc_test_server }}"
+      Dockerfile-client: "{{ docker_scala_grpc_test_client }}"
+
+- file: path={{ dir }} state=directory owner={{ os_admin_user }} group={{ os_admin_group }} mode=755
+  become: yes
+
+- template: src={{ item.key }}.j2 dest={{ dir }}/{{ item.key }} owner={{ os_admin_user }} group={{ os_admin_group }} mode=644
+  with_dict: dockerfiles
+  become: yes
+
+- command: docker build -t {{ item.value }} -f {{ item.key }} .
+  args:
+    chdir: "{{ dir }}"
+  with_dict: dockerfiles
+  become: yes
+
+- command: docker tag {{ item.value }} {{ docker_registry_domain }}:{{ docker_registry_port }}/{{ item.value }}
+  with_dict: dockerfiles
+  become: yes
+
+- command: docker push {{ docker_registry_domain }}:{{ docker_registry_port }}/{{ item.value }}
+  with_dict: dockerfiles
+  become: yes
